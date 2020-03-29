@@ -9,7 +9,12 @@ eureka:
     service-url:
       # 设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址
       # 访问localhost:7001查看主界面
-      defaultZone: http://eureka7002.com:7002/eureka/
+#      defaultZone: http://eureka7002.com:7002/eureka/
+      # 单机版
+      defaultZone: http://eureka7001.com:7001/eureka/
+  server:
+    enable-self-preservation: false  # 禁用自我保护
+    eviction-interval-timer-in-ms: 2000 # 清理无效节点的时间间隔，默认60000毫秒，即60秒
 spring:
   application:
     name: cloud-eureka-server1
