@@ -23,3 +23,6 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com/eureka
     fetch-registry: true  # 表示是否从eureka抓取已有的注册信息，默认为true,单节点无所谓，集群必须设置为true才能配合ribbon使用
     register-with-eureka: true # 表示将自己注册到eureka,默认true
+  instance:
+    prefer-ip-address: true  # 真实IP显示
+    instance-id: payment8001 # 注册进eurekaServer的Status栏显示的名称
