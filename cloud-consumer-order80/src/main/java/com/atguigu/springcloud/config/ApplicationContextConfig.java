@@ -16,7 +16,7 @@ public class ApplicationContextConfig {
 
 	// 此处必须加@LoadBalanced注解，否则会报错
 	@Bean
-	@LoadBalanced
+//	@LoadBalanced    //暂时注释，验证自定义规则
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
