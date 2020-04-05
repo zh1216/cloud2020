@@ -6,8 +6,8 @@ eureka:
     register-with-eureka: true # 表示将自己注册到注册中心
     fetch-registry: true # 是否拉取已有的注册信息
     service-url:
-#      defaultZone: http://localhost:7001/eureka
-      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com/eureka
+      defaultZone: http://localhost:7001/eureka
+#      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com/eureka
 spring:
   application:
     name: cloud-order-service
