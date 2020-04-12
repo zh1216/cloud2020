@@ -10,3 +10,7 @@ eureka:
 spring:
   application:
     name: cloud-hystrix-order-service
+
+feign:
+  hystrix:
+    enabled: true
