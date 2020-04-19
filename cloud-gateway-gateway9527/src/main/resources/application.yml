@@ -18,7 +18,14 @@ spring:
 #          uri: http://localhost:8001
           uri: lb://CLOUD-PAYMENT-SERVICE  # 根据服务名，lb是负载均衡
           predicates:
-            - Path=/payment/lb/**
+            - Path=/payment/lb/**   # <<多个断言条件是“ 与 ”的关系>>
+#            - After=2020-04-19T22:35:23.298+08:00[Asia/Shanghai]  # ZonedDateTime.now();
+#            - Cookie=username,zhang    #  cookie匹配，cookie值为username cookie值于zhang正则匹配。 >curl http://localhost:9527/payment/lb --cookie "username=zhang"
+#            - Header=X-Request-Id,\d+  #  请求头匹配，请求头必须包含X-Request-Id,且值必须为数字(\d+)  >curl http://localhost:9527/payment/lb -H "X-Request-Id:123"
+#            - Host={sub}.myhost.org     # 主机域名匹配 >curl http://localhost:9527/payment/lb -H "Host:www.myhost.org"
+#            - Host=**.somehost.org,**.anotherhost.org     # 主机域名匹配
+#            - Method=GET,POST  # 请求方式匹配
+#            - Query=green,\d+  # 查询条件匹配，请求带有参数green,且参数值为数字，正则可不写。 > curl http://localhost:9527/payment/lb?green=1
 eureka:
   instance:
     hostname: cloud-gateway-service
