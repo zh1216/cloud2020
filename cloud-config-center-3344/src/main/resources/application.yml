@@ -13,7 +13,20 @@ spring:
             - cloud2020-config
       # 分支
       label: master
+  # rabbitmq配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
 eureka:
   client:
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'  # 开放端点刷新
