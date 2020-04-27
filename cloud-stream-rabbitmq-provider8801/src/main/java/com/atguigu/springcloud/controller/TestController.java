@@ -30,4 +30,12 @@ public class TestController {
 		testTopic.output().send(MessageBuilder.withPayload(message).build());
 		return "ok";
 	}
+
+	@GetMapping("/sendMessage/condition")
+	public String messageWithMQCondition(@RequestParam String message) {
+		log.info("controller 发送消息{}", message);
+		testTopic.output().send(MessageBuilder.withPayload(message).setHeader("version", "1.0").build());
+		testTopic.output().send(MessageBuilder.withPayload(message).setHeader("version", "2.0").build());
+		return "ok";
+	}
 }
