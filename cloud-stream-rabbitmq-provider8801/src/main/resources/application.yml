@@ -24,6 +24,12 @@ spring:
 #            partitionKeyExpression: payload # 通过该参数指定了分区键的表达式规则，我们可以根据实际的输出消息规则来配置SpEL来生成合适的分区键；
             partitionKeyExpression: MyPartitionKeyStrategy # 自定义策略的类名
             partitionCount: 2  # 该参数指定了消息分区的数量。
+
+        example-topic-input:  # 输入通道指向aaa-topic
+          destination: aaa-topic
+
+        example-topic-output: # 输出通道指向aaa-topic
+          destination: aaa-topic
 eureka:
   client:
     service-url:
@@ -33,3 +39,8 @@ eureka:
     lease-renewal-interval-in-seconds: 2 # 心跳时间间隔(默认30s)
     instance-id: send-8801.com  # 在信息列表显示主机名称
     prefer-ip-address: true  # 显示真实ip
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
