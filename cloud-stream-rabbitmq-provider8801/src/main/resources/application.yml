@@ -1,0 +1,35 @@
+server:
+  port: 8801
+spring:
+  application:
+    name: cloud-stream-provider
+  cloud:
+    stream:
+      binders:  # 配置要绑定的rabbitmq的服务信息
+        defaultRabbit:   # 定义名称，用于binding整合
+          type: rabbit   # 消息组件类型
+          environment:   # 设置rabbitMQ的相关环境配置
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
+      bindings: # 服务整合处理
+        output: # 这个名字是一个通道的名称
+          destination: studyExchange   # 表示使用的Exchange名称定义
+          content-type: application/json # 设置消息类型，本次为json，文本则设置为“text/plain”
+          binder: defaultRabbit  # 设置要绑定的消息服务的具体配置
+          producer:
+#            partitionKeyExpression: payload # 通过该参数指定了分区键的表达式规则，我们可以根据实际的输出消息规则来配置SpEL来生成合适的分区键；
+            partitionKeyExpression: MyPartitionKeyStrategy # 自定义策略的类名
+            partitionCount: 2  # 该参数指定了消息分区的数量。
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+  instance:
+    lease-expiration-duration-in-seconds: 5 # 超时剔除(默认90s)
+    lease-renewal-interval-in-seconds: 2 # 心跳时间间隔(默认30s)
+    instance-id: send-8801.com  # 在信息列表显示主机名称
+    prefer-ip-address: true  # 显示真实ip
