@@ -27,9 +27,20 @@ spring:
 
         example-topic-input:  # 输入通道指向aaa-topic
           destination: aaa-topic
+          consumer:
+            maxAttempts: 2 # 消费失败重试次数，默认是3次
+          group: stream-exception-handler  #  定义组名
 
         example-topic-output: # 输出通道指向aaa-topic
           destination: aaa-topic
+      rabbit:
+        bindings:
+          example-topic-input:
+            consumer:
+              auto-bind-dlq: true  # 开启死信队列
+              requeueRejected: true # 消费失败，重新入队
+              republishToDlq: false #
+
 eureka:
   client:
     service-url:
