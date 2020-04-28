@@ -26,13 +26,13 @@ spring:
             partitionCount: 2  # 该参数指定了消息分区的数量。
 
         example-topic-input:  # 输入通道指向aaa-topic
-          destination: aaa-topic
+          destination: delay-topic
           consumer:
             maxAttempts: 2 # 消费失败重试次数，默认是3次
           group: stream-exception-handler  #  定义组名
 
         example-topic-output: # 输出通道指向aaa-topic
-          destination: aaa-topic
+          destination: delay-topic
       rabbit:
         bindings:
           example-topic-input:
@@ -40,7 +40,10 @@ spring:
               auto-bind-dlq: true  # 开启死信队列
               requeueRejected: true # 消费失败，重新入队
               republishToDlq: false #
-
+              delayed-exchange: true  # 开启延迟消息
+          example-topic-output:
+            producer:
+              delayed-exchange: true  # 生产端开启延迟消息 创建exchange时,会将其设置为具有延迟特性的exchange
 eureka:
   client:
     service-url:

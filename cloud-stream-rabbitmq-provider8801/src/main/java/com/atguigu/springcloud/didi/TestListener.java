@@ -33,6 +33,11 @@ public class TestListener {
 //		}
 //	}
 
+	/**
+	 * condition
+	 * @param message
+	 * @param version
+	 */
 	@StreamListener(value = TestTopic.INPUT,condition="headers['version']=='1.0'")
 	public void receiveV1(Message message, @Header("version") String version) {
 		log.info("receive v1 接收到消息{}\t，版本{}", message.getPayload().toString(), version);
@@ -42,6 +47,11 @@ public class TestListener {
 	@StreamListener(value = TestTopic.INPUT,condition="headers['version']=='2.0'")
 	public void receiveV2(Message message, @Header("version") String version) {
 		log.info("receive v2 接收到消息{}\t，版本{}", message.getPayload().toString(), version);
+	}
+
+	@StreamListener(value = TestTopic.INPUT)
+	public void receiveDelay(Message message){
+		log.info("receive delay method 接收到消息{}", message.getPayload().toString());
 	}
 
 

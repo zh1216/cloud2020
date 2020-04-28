@@ -38,4 +38,12 @@ public class TestController {
 		testTopic.output().send(MessageBuilder.withPayload(message).setHeader("version", "2.0").build());
 		return "ok";
 	}
+
+
+	@GetMapping("/sendMessage/delay")
+	public String messageWithMQDelay(@RequestParam String message) {
+		log.info("controller 发送消息{}", message);
+		testTopic.output().send(MessageBuilder.withPayload(message).setHeader("x-delay", "5000").build());
+		return "ok";
+	}
 }
