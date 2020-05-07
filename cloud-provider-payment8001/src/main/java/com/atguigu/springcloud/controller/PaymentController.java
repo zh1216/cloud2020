@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.security.spec.ECFieldF2m;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -87,5 +89,16 @@ public class PaymentController {
 	@GetMapping("/payment/lb")
 	public String getPaymentLb() {
 		return port;
+	}
+
+	@GetMapping("/payment/zipkin")
+	public String paymentZipKin(HttpServletRequest request){
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()){
+			String header = headerNames.nextElement();
+			log.info("header:{},info:{}",header,request.getHeader(header));
+		}
+		log.info("payment service receive request ...");
+		return "hello sleuth + zipkin";
 	}
 }
