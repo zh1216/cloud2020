@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml # 文件后缀
+        namespace: c1057286-41bd-4a50-a1e7-56ea580a13d7
+        group: DEV_GROUP
