@@ -12,6 +12,11 @@
     <artifactId>cloudalibaba-sentinel-server8401</artifactId>
     <dependencies>
         <dependency>
+            <groupId>com.atguigu.cloud</groupId>
+            <artifactId>cloud-api-common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
