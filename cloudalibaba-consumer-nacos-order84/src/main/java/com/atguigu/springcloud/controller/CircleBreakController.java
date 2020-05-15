@@ -4,6 +4,7 @@ import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.atguigu.springcloud.entities.CommonResult;
 import com.atguigu.springcloud.entities.Payment;
+import com.atguigu.springcloud.feign.PaymentFeign;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,9 @@ public class CircleBreakController {
 
 	@Resource
 	private RestTemplate restTemplate;
+
+	@Resource
+	PaymentFeign paymentFeign;
 
 
 	@GetMapping("/consume/fallback/{id}")
@@ -57,4 +61,8 @@ public class CircleBreakController {
 		return new CommonResult<>(445, "blockException Method ");
 	}
 
+	@GetMapping("/consume/feign/{id}")
+	public CommonResult<Payment> consumePayment(@PathVariable("id") Long id){
+		return paymentFeign.paymentSql(id);
+	}
 }

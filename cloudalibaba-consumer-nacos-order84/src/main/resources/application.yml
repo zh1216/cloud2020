@@ -19,4 +19,6 @@ management:
     web:
       exposure:
         exclude: '*'
-
+feign:
+  sentinel:
+    enabled: true
