@@ -11,6 +11,14 @@ spring:
       transport:
         dashboard: localhost:8080
         port: 8719
+      datasource:
+        ds1:
+          nacos:
+            serverAddr: localhost:8848
+            groupId: DEFAULT_GROUP
+            dataId: ${spring.application.name}-sentinel
+            dataType: json # 数据类型，默认json
+            ruleType: flow #规则类型，可配置[flow(限流)、degrade(降级)、authority(权限)等]
 service:
   url: http://nacos-payment-provider/
 
